@@ -1,0 +1,140 @@
+.navbar {
+    display: flex;
+    justify-content: flex-end;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    z-index: 5;
+    padding: 1rem;
+    background-color: rgb(32, 32, 32);
+}
+
+.inline{
+    height: auto;
+    display: flex;
+    margin-right: 15rem;
+    position: relative;
+}
+
+.btn-primary {
+    height: fit-content;
+    position: relative;
+    border: none;
+    background: none;
+    font-size: 1rem;
+    color: var(--primary-tint);
+    padding: 0 1rem;
+    transition: 0.3s ease-in-out;
+    letter-spacing: .1rem;
+}
+.btn-primary::after{
+    content: '';
+    position: absolute;
+    width: 80%;
+    transform: scaleX(0);
+    height: 0.15rem;
+    bottom: -8px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background-color: var(--main-tint);
+    transform-origin: center center;
+    transition: transform 0.25s ease-out;
+}
+.btn-primary:hover::after{
+    cursor: pointer;
+    color: var(--main-tint);
+    transform: scaleX(1);
+    transform-origin: center center;
+    }
+
+.selected{
+    color: var(--main-tint);    
+
+}
+.selected::after{
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 0.15rem;
+    bottom: -8px;
+    transform: scaleX(1);
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    z-index: 5;
+    background-color: var(--main-tint);
+}
+.gap-10{
+    gap: .5rem;
+}
+.expanded-view {
+    height: 100vh;
+    width: 100%;
+    z-index: 12;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background: rgba(0,0,0,0.8);
+    padding: 3rem 0;
+    justify-content: center;
+}
+
+.expanded-view button{
+    padding: .5rem 3rem;
+    transition: 0.5s ease-in-out;
+}
+.expanded-view button:hover{
+    color: var(--main-tint);
+}
+.hamburger {
+    display: none;
+}
+.hide{
+    display: none;
+}
+.show{
+    outline: none;
+    background: none;
+    border: none;
+    color: var(--primary-tint);
+    position: absolute;
+    font-size: 1.5rem;
+    top: .5rem;
+    right: 2rem;
+    transition: 0.3s ease-in-out;
+}
+.show:hover{
+    color: var(--main-tint);
+}
+.active:hover{
+    color: var(--main-tint);
+}
+@media screen and (max-width: 1500px) {
+    .inline{
+        margin-right: 10rem;
+    }
+  }
+@media screen and (max-width: 900px) {
+    .inline{
+        display: none;
+    }
+    .hamburger {
+        color: white;
+        display:flex;
+        flex-direction: flex-end;
+        margin: 1rem 2rem;
+        font-size: 1.5rem;
+        transition: 0.3s ease-in-out;
+    }
+
+    .hamburger:hover{
+        color: var(--main-tint);
+    }
+    .btn-primary{
+        height: 4rem;
+    }
+    .btn-primary::after{
+        width: 15%;
+    }
+  }
