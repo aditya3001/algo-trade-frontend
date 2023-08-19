@@ -60,7 +60,7 @@ const Navbar = (props)=>{
         // ctx.dispatch({type:'INIT', data:0})
     }
     return (<Fragment>
-        <div className='navbar'>
+        <div className="bg-gray-700 navbar">
                     {/* <button id='signin' className='btn-primary' onClick={handleSignIn}>Sign Up</button> */}
             <div className={hamburgerActive?'expanded-view':'inline'}>
                 <div className={hamburgerActive===false? 'hide':'show'} ><FontAwesomeIcon icon={faTimes} onClick={(e)=>handleHamburgerState(e)} /></div>

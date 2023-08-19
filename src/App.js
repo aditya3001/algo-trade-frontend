@@ -6,7 +6,7 @@ import Navbar from './components/navbar/Navbar';
 import ParametersManipulator from './components/ParametersManipulator/ParametersManipulator';
 
 export const globalContext = createContext();
-export const baseUri = 'http://ec2-52-9-207-36.us-west-1.compute.amazonaws.com:8080'
+export const baseUri = 'http://localhost:8080'
 function App() {
   const logState = localStorage.getItem('loggedIn')===undefined?false:localStorage.getItem('loggedIn')==='true'?true:false;
   const [loggedInState, setLoggedInState] = useState(logState)

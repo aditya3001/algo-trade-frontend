@@ -214,14 +214,15 @@ const RealTimeMinuteDataViewer = () => {
     <div className='realtime-data-viewer-container'>
     
     <div className='chart-container'>
-      <Line data={pnlChartData} options={pnlChartOptions} />
-      <Line data={chartData} options={chartOptions} />
+      <div className='chart'><Line data={pnlChartData} options={pnlChartOptions} /></div>
+      <div className='chart'><Line data={chartData} options={chartOptions} /></div>
+      
       {/* <RTLineChart data={data} /> */}
     </div>
       {/* Display the fetched data */}
       <div className='table-view'>
 
-        <table id='table' style={{ borderCollapse: 'collapse', borderSpacing: '0', width: '100%' }}>
+        <table id='table' className="m-1" style={{ borderCollapse: 'collapse', borderSpacing: '0', width: '100%' }}>
         <thead id='header'>
             <tr>
                 <th className='tableHeaderStyle'>Time</th>

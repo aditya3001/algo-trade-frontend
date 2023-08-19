@@ -63,12 +63,16 @@ const ParametersManipulator = function(){
        
     }
     return(<div className="parameter-container">
-        <form onSubmit={submitForm}>
-            <label>Parameter Name</label>
-            <input type="text" placeholder="Parameter Name" value={input.parameterName} onChange={e=>{setInput({...input,parameterName:e.target.value})}} required/>
-            <label>Pivot Strike PE</label>
-            <input type="text" placeholder="Parameter Value" value={input.parameterValue} onChange={e=>{setInput({...input,parameterValue:e.target.value})}} required/>
-            <button type="submit">SUBMIT</button>
+        <form onSubmit={submitForm} className="p-4 flex flex-col gap-3">
+            <div className="flex justify-between gap-4">
+                <label>Parameter Name</label>
+                <input type="text" placeholder="Parameter Name" className="text-black" value={input.parameterName} onChange={e=>{setInput({...input,parameterName:e.target.value})}} required/>
+            </div>
+            <div className="flex justify-between gap-4">
+                <label>Parameter Value</label>
+                <input type="text" placeholder="Parameter Value" className="text-black" value={input.parameterValue} onChange={e=>{setInput({...input,parameterValue:e.target.value})}} required/>
+            </div>    
+            <button type="submit" className="bg-gray-700 btn">SUBMIT</button>
         </form>
 
         <div className="parameter-table-container">
@@ -84,7 +88,7 @@ const ParametersManipulator = function(){
                     {parameters.map((p) => {return (<tr key={p.parameterId}>
                             <th>{p.parameterName}</th>
                             <th>{p.parameterValue}</th>
-                            <th><button onClick={e=>{deleteParameter(e,p)}}>Delete</button></th>
+                            <th><button className="bg-gray-800 p-1 btn" onClick={e=>{deleteParameter(e,p)}}>Delete</button></th>
                         </tr>)
                     })}
                 </tbody>

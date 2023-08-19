@@ -6,7 +6,7 @@
     width: 100vw;
     z-index: 5;
     padding: 1rem;
-    background-color: rgb(32, 32, 32);
+    /* background-color: rgb(32, 32, 32); */
 }
 
 .inline{
@@ -123,7 +123,7 @@
         color: white;
         display:flex;
         flex-direction: flex-end;
-        margin: 1rem 2rem;
+        margin: 0rem 2rem;
         font-size: 1.5rem;
         transition: 0.3s ease-in-out;
     }

@@ -26,3 +26,11 @@ table{
 tbody{
     border-bottom: 0.1rem solid white;
 }
+
+.btn{
+    transition: 0.1s ease-in-out;
+}
+
+.btn:hover{
+    transform: scale(1.1);
+}
