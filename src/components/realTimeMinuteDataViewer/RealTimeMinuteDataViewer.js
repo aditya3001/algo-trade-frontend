@@ -77,24 +77,28 @@ const RealTimeMinuteDataViewer = () => {
         data: data.map((item) => item.callPnl),
         borderColor: 'rgb(75, 192, 192)',
         fill: false,
+        pointRadius:0
       },
       {
         label: 'Put_Pnl',
         data: data.map((item) => item.putPnl),
         borderColor: 'rgb(75, 192, 100)',
         fill: false,
+        pointRadius:0
       },
       {
         label: 'Fwd_Pnl',
         data: data.map((item) => item.fwdPnl),
         borderColor: 'rgb(75, 100, 192)',
         fill: false,
+        pointRadius:0
       },
       {
         label: 'Total_Pnl',
         data: data.map((item) => item.totalPnl),
         borderColor: 'rgb(255, 255, 255)',
         fill: false,
+        pointRadius:0
       },
     ],
   };
@@ -106,18 +110,21 @@ const RealTimeMinuteDataViewer = () => {
         data: data.map((item) => item.priceFwd),
         borderColor: 'rgb(75, 192, 192)',
         fill: false,
+        pointRadius:0
       },
       {
         label: 'Up Hedge Point',
         data: data.map((item) => item.upHedgePoint),
         borderColor: 'blue',
         fill: false,
+        pointRadius:0
       },
       {
         label: 'Down Hedge Point',
         data: data.map((item) => item.downHedgePoint),
         borderColor: 'green',
         fill: false,
+        pointRadius:0
       },
       {
         label: 'Up Hedge Point',
@@ -138,6 +145,7 @@ const RealTimeMinuteDataViewer = () => {
         pointRadius: 5, 
       }
     ],
+    clip: {left: 5, top: false, right: -2, bottom: 0}
   };
 
   const modifyDateTime = function(dateTime){

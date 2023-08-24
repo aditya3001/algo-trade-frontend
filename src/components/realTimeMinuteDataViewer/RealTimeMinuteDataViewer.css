@@ -6,8 +6,8 @@
     /* padding: 30px; */
     background-color: black;
     padding: 1rem;
-    @media (max-width: 540px) {
-        width: 540px;
+    @media (max-width: 600px) {
+        width: 600px;
     }
 }
 
@@ -21,8 +21,8 @@
         flex-direction: column;
         align-items: center;
     }
-    @media (max-width: 540px) {
-        width: 540px;
+    @media (max-width: 600px) {
+        width: 600px;
     }
 }
 .chart{
@@ -35,8 +35,8 @@
         height:40vh;
         width: 100vw;
     }
-    @media (max-width: 540px) {
-        width: 540px;
+    @media (max-width: 600px) {
+        width: 600px;
     }
 }
 .table-view{
