@@ -8,7 +8,6 @@
     padding: 1rem;
     @media (max-width: 540px) {
         width: 540px;
-        overflow-x: auto;
     }
 }
 
