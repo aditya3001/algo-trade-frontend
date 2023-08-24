@@ -1,7 +1,9 @@
-import RealTimeMinuteDataViewer from "../RealTimeMinuteDataViewer/RealTimeMinuteDataViewer"
-import React from "react";
-const Home = function(){
-
+import RealTimeMinuteDataViewer from "../realTimeMinuteDataViewer/RealTimeMinuteDataViewer"
+import React, { useEffect } from "react";
+const Home = function(props){
+    useEffect(()=>{
+        props.setCurrentSection(0);
+    },[props])
     return (<div style={{color:'white'}}>
         <RealTimeMinuteDataViewer />
 

@@ -1,24 +1,23 @@
 import { useEffect, useState } from "react"
 import './ParametersManipulator.css'
-import { baseUri } from "../../App";
+import { ACCESS_TOKEN, API_BASE_URL } from "../../constants/Constants";
 
-const ParametersManipulator = function(){
+const ParametersManipulator = function(props){
     const [input, setInput] = useState({parameterName:"",parameterValue:""})
-    // const [parametersCreated, setParametersCreated] = useState(false);
 
     useEffect(()=>{
-        console.log('SHIT')
         getAllParameters();
+        props.setCurrentSection(1);
     },[])
 
     async function submitForm(e){
         e.preventDefault();
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' ,"Access-Control-Allow-Origin": "*"},
+            headers: { 'Content-Type': 'application/json' ,"Access-Control-Allow-Origin": "*","Authorization":`Bearer ${localStorage.getItem(ACCESS_TOKEN)}`},
             body: JSON.stringify(input)
         };
-        const response = await fetch(`${baseUri}/parameters/createParameter`, requestOptions);
+        const response = await fetch(`${API_BASE_URL}/parameters/createParameter`, requestOptions);
         // const data = await response.json();
         if(response.status === 200){
             // setParametersCreated(true);
@@ -35,9 +34,9 @@ const ParametersManipulator = function(){
     async function getAllParameters(){
         const requestOptions = {
             method: 'GET',
-            headers: { 'Content-Type': 'application/json' ,"Access-Control-Allow-Origin": "*"},
+            headers: { 'Content-Type': 'application/json' ,"Access-Control-Allow-Origin": "*","Authorization":`Bearer ${localStorage.getItem(ACCESS_TOKEN)}`},
         };
-        const response = await fetch(`${baseUri}/parameters`, requestOptions);
+        const response = await fetch(`${API_BASE_URL}/parameters`, requestOptions);
         console.log("Response : ",response.status)
         if(response.status === 200){
             const data = await response.json();
@@ -51,9 +50,9 @@ const ParametersManipulator = function(){
         event.preventDefault();
         const requestOptions = {
             method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' ,"Access-Control-Allow-Origin": "*"},
+            headers: { 'Content-Type': 'application/json' ,"Access-Control-Allow-Origin": "*", "Authorization":`Bearer ${localStorage.getItem(ACCESS_TOKEN)}`},
         };
-        const response = await fetch(`http://localhost:8080/parameters/${param.parameterId}`, requestOptions);
+        const response = await fetch(`${API_BASE_URL}/parameters/${param.parameterId}`, requestOptions);
         // console.log("Response : ",response)
         if(response.ok){
             getAllParameters();

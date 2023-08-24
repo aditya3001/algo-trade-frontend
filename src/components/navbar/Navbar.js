@@ -3,6 +3,7 @@ import './Navbar.css'
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { ACCESS_TOKEN } from '../../constants/Constants';
 // import { globalContext } from '../../App';
 
 const Navbar = (props)=>{
@@ -14,6 +15,13 @@ const Navbar = (props)=>{
             return !cVal;
         })
     }
+    const handleLogout = (e)=>{
+        e.preventDefault();
+        localStorage.removeItem(ACCESS_TOKEN);
+        props.setState({authenticated : false, currentUser : null,loading:false})
+        navigate('/login', {replace:true});
+        console.log('Logged Out Successfully!')
+      }
     // const ctx = useContext(globalContext);
 
   
@@ -49,13 +57,12 @@ const Navbar = (props)=>{
         } else if(e.target.id === 'Charts'){
             props.setCurrentSection(2);
             navigate('/charts')
-
         } 
-        // else if(e.target.id === 'Login'){
-        //     props.setCurrentSection(6);
-        //     navigate ('/login');
+        else if(e.target.id === 'Login'){
+            props.setCurrentSection(3);
+            navigate ('/login');
 
-        // }
+        }
         setHamburgerActive(false);
         // ctx.dispatch({type:'INIT', data:0})
     }
@@ -68,7 +75,8 @@ const Navbar = (props)=>{
                 <button className={props.currentSection===1?'btn-primary selected':'btn-primary'} 
                 onClick={handleButtonClick} id='AlgoParameters'> Parameters</button>
                 <button className={props.currentSection===2?'btn-primary selected':'btn-primary'}  onClick={handleButtonClick} id='Charts'> Charts</button>
-                {/* {props.loggedInState===true?<button id='Logout' className='btn-primary' onClick={handleClick}>LOGOUT</button>:<button id='Login' className={props.currentSection===6?'btn-primary selected':'btn-primary'}  onClick={handleButtonClick}>LOGIN</button>} */}
+                
+                {props.state.authenticated===true?<button id='Logout' className='btn-primary' onClick={handleLogout}>Logout</button>:<button className={props.currentSection===3?'btn-primary selected':'btn-primary'}  onClick={handleButtonClick} id='Login'> Login</button>}
             </div>
             <div className='hamburger'><FontAwesomeIcon icon={faBars} onClick={(e)=>handleHamburgerState(e)} size='lg'/></div>
             

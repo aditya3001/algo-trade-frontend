@@ -16,7 +16,7 @@ import {
     TimeScale
     
   } from 'chart.js';
-import { baseUri } from '../../App';
+import { ACCESS_TOKEN, API_BASE_URL } from '../../constants/Constants';
 
 
 ChartJS.register(
@@ -123,19 +123,19 @@ const RealTimeMinuteDataViewer = () => {
         label: 'Up Hedge Point',
         data: data.map((item) => {return parseInt(item.hedgeFlag) === 1 ?item.upHedgePoint:null}),
         backgroundColor: 'blue', 
-        pointRadius: 6, 
+        pointRadius: 5, 
       },
       {
         label: 'Down Hedge Point',
         data: data.map((item) => {return parseInt(item.hedgeFlag) === 1 ?item.downHedgePoint:null}),
         backgroundColor: 'green', 
-        pointRadius: 6, 
+        pointRadius: 5, 
       },
       {
-        label: 'Put_Pnl',
+        label: 'Fwd Hedge Point',
         data: data.map((item) => {return parseInt(item.hedgeFlag) === 1 ?item.lastHedgePoint:null}),
-        backgroundColor: 'yellow', 
-        pointRadius: 6, 
+        backgroundColor: 'rgb(75, 192, 192)', 
+        pointRadius: 5, 
       }
     ],
   };
@@ -149,12 +149,17 @@ const RealTimeMinuteDataViewer = () => {
 
   const fetchOnce = async () => {
     try {
-      const response = await fetch(`${baseUri}/data/minuteData/gammaShort`);
+      const requestOptions = {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' ,"Access-Control-Allow-Origin": "*","Authorization":`Bearer ${localStorage.getItem(ACCESS_TOKEN)}`},
+      };
+      const response = await fetch(`${API_BASE_URL}/data/minuteData/gammaShort`,requestOptions);
 
       const jsonData = await response.json();
       if(response.ok){
         jsonData.reverse()
-        setData(jsonData)     
+        setData(jsonData)  
+        currentData.current = jsonData[0].index   
       }else{
         console.log('ERROR')
         throw new Error('Network response was not ok');
@@ -165,7 +170,11 @@ const RealTimeMinuteDataViewer = () => {
   };
   const fetchData = async () => {
     try {
-      const response = await fetch(`${baseUri}/data/minuteData/gammaShort/getLatestRow`);
+      const requestOptions = {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' ,"Access-Control-Allow-Origin": "*","Authorization":`Bearer ${localStorage.getItem(ACCESS_TOKEN)}`},
+      };
+      const response = await fetch(`${API_BASE_URL}/data/minuteData/gammaShort/getLatestRow`,requestOptions);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -173,7 +182,7 @@ const RealTimeMinuteDataViewer = () => {
     const jsonData = await response.json();
      if(response.ok){
 
-        // console.log(currentData.current,jsonData.index);
+        console.log(currentData.current,jsonData.index);
         // console.log(currentData.current != jsonData.index);
 
         if(currentData.current !== jsonData.index){
@@ -184,8 +193,6 @@ const RealTimeMinuteDataViewer = () => {
       }else{
         console.log('ERROR')
       }
-    // jsonData.reverse()
-      // setData(jsonData);
     } catch (error) {
       // Handle error
     }
