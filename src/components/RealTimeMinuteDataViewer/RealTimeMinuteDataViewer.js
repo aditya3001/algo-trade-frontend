@@ -182,7 +182,7 @@ const RealTimeMinuteDataViewer = () => {
     const jsonData = await response.json();
      if(response.ok){
 
-        console.log(currentData.current,jsonData.index);
+        // console.log(currentData.current,jsonData.index);
         // console.log(currentData.current != jsonData.index);
 
         if(currentData.current !== jsonData.index){
