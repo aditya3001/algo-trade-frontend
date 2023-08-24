@@ -65,7 +65,7 @@ const RealTimeMinuteDataViewer = () => {
       y: {
       },
     },
-    animation:false
+    animation:false,
 
   };
 

@@ -5,6 +5,11 @@
     gap: 5vh;
     /* padding: 30px; */
     background-color: black;
+    padding: 1rem;
+    @media (max-width: 540px) {
+        width: 540px;
+        overflow-x: auto;
+    }
 }
 
 .chart-container{
@@ -17,7 +22,9 @@
         flex-direction: column;
         align-items: center;
     }
-
+    @media (max-width: 540px) {
+        width: 540px;
+    }
 }
 .chart{
     height: 50vh;
@@ -29,15 +36,18 @@
         height:40vh;
         width: 100vw;
     }
+    @media (max-width: 540px) {
+        width: 540px;
+    }
 }
 .table-view{
-    width: 100vw;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
     max-height: 100vh;
-    overflow: auto;
+    overflow-y: auto;
     padding: 10px;
     font-weight: 100;
     font-family: 'Courier New', Courier, monospace;
