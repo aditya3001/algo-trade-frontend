@@ -8,6 +8,7 @@ import Login from './components/login/Login';
 import { ACCESS_TOKEN } from './constants/Constants.js';
 import { getCurrentUser } from './util/APIUtil';
 import PrivateRoute from './common/PrivateRoute';
+import Strategies from './components/strategies/Strategies';
 
 export const globalContext = createContext();
 
@@ -53,6 +54,8 @@ function App() {
                 <Route path='/home' element={<PrivateRoute state={state} setCurrentSection={presistAndSetCurrentSection} />}> <Route path="" element = {<Home state={state} setCurrentSection={presistAndSetCurrentSection} />} /> </Route>
                 <Route path='/parameters' element={<PrivateRoute state={state} setCurrentSection={presistAndSetCurrentSection}/> }> <Route path="" element = {<ParametersManipulator state={state} setCurrentSection={presistAndSetCurrentSection}/>} /> </Route>
                 <Route path='/login' element={<Login setCurrentSection={presistAndSetCurrentSection} setState={setState}/>}/> 
+                <Route path='/strategies' element={<Strategies setCurrentSection={presistAndSetCurrentSection} setState={setState}/>}/> 
+                
               </Routes>
             </div>
       </Router>

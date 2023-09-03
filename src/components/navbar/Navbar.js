@@ -54,11 +54,10 @@ const Navbar = (props)=>{
         } else if(e.target.id === 'AlgoParameters'){
             props.setCurrentSection(1);
             navigate('/parameters')
-        } else if(e.target.id === 'Charts'){
+        } else if(e.target.id === 'Strategies'){
             props.setCurrentSection(2);
-            navigate('/charts')
-        } 
-        else if(e.target.id === 'Login'){
+            navigate('/strategies')
+        } else if(e.target.id === 'Login'){
             props.setCurrentSection(3);
             navigate ('/login');
 
@@ -74,7 +73,7 @@ const Navbar = (props)=>{
                 <button className={props.currentSection===0?'btn-primary selected':'btn-primary'}  onClick={handleButtonClick} id='Home'> Home</button>
                 <button className={props.currentSection===1?'btn-primary selected':'btn-primary'} 
                 onClick={handleButtonClick} id='AlgoParameters'> Parameters</button>
-                <button className={props.currentSection===2?'btn-primary selected':'btn-primary'}  onClick={handleButtonClick} id='Charts'> Charts</button>
+                <button className={props.currentSection===2?'btn-primary selected':'btn-primary'}  onClick={handleButtonClick} id='Strategies'>Strategies</button>
                 
                 {props.state.authenticated===true?<button id='Logout' className='btn-primary' onClick={handleLogout}>Logout</button>:<button className={props.currentSection===3?'btn-primary selected':'btn-primary'}  onClick={handleButtonClick} id='Login'> Login</button>}
             </div>

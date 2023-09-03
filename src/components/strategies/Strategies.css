@@ -1,0 +1,26 @@
+.results{
+    display: flex;
+    width: 100vw;
+    height: fit-content;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0 1rem 0;
+    overflow-y: auto;
+    @media (max-width: 600px) {
+        flex-direction: column;
+    }
+
+}
+
+.img-results, .df-results{
+    display:flex;
+    flex-direction: column;
+    width: 45%;
+    height: 60vh;
+    overflow-y: auto;
+    @media (max-width: 600px) {
+        flex-direction: column;
+        width: 100%;
+    }
+}
+
