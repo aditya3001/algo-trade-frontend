@@ -10,7 +10,7 @@ const DataTable = (props)=>{
         return props.data.map((item, index) => {
           return (
               <tr key={index}>
-                {Object.keys(item).map((k,index)=>{return <td className='tableCellStyle' key={index}>{item[k]}</td>})}
+                {Object.keys(item).map((k,index)=>{return <td className='tableCellStyle' key={index}>{item[k].toFixed(2)}</td>})}
          
               </tr>
           );
