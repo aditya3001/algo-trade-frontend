@@ -29,13 +29,14 @@ ChartJS.register(
     Legend,
     TimeScale,
   );
-const RealTimeMinuteDataViewer = () => {
+const RealTimeMinuteDataViewer = (props) => {
   const [data, setData] = useState([]);
   const startHour = 0; // Replace with your start hour (0-23)
   const startMinute = 0; // Replace with your start minute (0-59)
   const endHour = 24; // Replace with your end hour (0-23)
   const endMinute = 0; // Replace with your end minute (0-59)
   const currentData = useRef(-1);
+  const [atmStatsData, setAtmStatsData] = useState([]);
 
   const pnlChartOptions = {
     scales: {
@@ -161,13 +162,14 @@ const RealTimeMinuteDataViewer = () => {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' ,"Access-Control-Allow-Origin": "*","Authorization":`Bearer ${localStorage.getItem(ACCESS_TOKEN)}`},
       };
-      const response = await fetch(`${API_BASE_URL}/data/minuteData/gammaShort`,requestOptions);
+      var inst = localStorage.getItem('CURRENT_HOME_STATE');
+      const response = await fetch(`${API_BASE_URL}/data/minuteData/gammaShort/${inst}`,requestOptions);
 
       const jsonData = await response.json();
       if(response.ok){
-        jsonData.reverse()
-        setData(jsonData)  
-        currentData.current = jsonData[0].index   
+        jsonData.minutewiseGSDataList.reverse()
+        setData(jsonData.minutewiseGSDataList)  
+        currentData.current = jsonData.minutewiseGSDataList[0].index   
       }else{
         console.log('ERROR')
         throw new Error('Network response was not ok');
@@ -178,24 +180,23 @@ const RealTimeMinuteDataViewer = () => {
   };
   const fetchData = async () => {
     try {
-      const requestOptions = {
+  
+    const requestOptions = {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' ,"Access-Control-Allow-Origin": "*","Authorization":`Bearer ${localStorage.getItem(ACCESS_TOKEN)}`},
       };
-      const response = await fetch(`${API_BASE_URL}/data/minuteData/gammaShort/getLatestRow`,requestOptions);
+      var inst = localStorage.getItem('CURRENT_HOME_STATE');
+      const response = await fetch(`${API_BASE_URL}/data/minuteData/${inst}`,requestOptions);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
 
-    const jsonData = await response.json();
-     if(response.ok){
-
-        // console.log(currentData.current,jsonData.index);
-        // console.log(currentData.current != jsonData.index);
-
-        if(currentData.current !== jsonData.index){
-          setData(prevData => [jsonData, ...prevData])
-          currentData.current = jsonData.index;
+      if(response.ok){
+        const jsonData = await response.json();
+        setAtmStatsData(jsonData.atmStats);
+        if(currentData.current !== jsonData.latestMinutewiseGSData.index){
+          setData(prevData => [jsonData.latestMinutewiseGSData, ...prevData])
+          currentData.current = jsonData.latestMinutewiseGSData.index;
         }
         
       }else{
@@ -205,10 +206,10 @@ const RealTimeMinuteDataViewer = () => {
       // Handle error
     }
   };
-
+  let timer = useRef(null);
   useEffect(() => {
     fetchOnce();
-    const pollingInterval = setInterval(() => {
+        timer.current = setInterval(() => {
         const now = new Date();
         const currentHour = now.getHours(); 
         const currentMinute = now.getMinutes(); 
@@ -220,23 +221,43 @@ const RealTimeMinuteDataViewer = () => {
       }, 5000); // Polling interval: 5 seconds
   
       return () => {
-        clearInterval(pollingInterval); // Cleanup
+        clearInterval(timer.current); // Cleanup
 
       };
   }, []); 
 
   return (
     <div className='realtime-data-viewer-container'>
+      
+    <div class='stats-container flex flex-col justify-center items-center'>
+    {atmStatsData.length === 0?  <><svg class="animate-spin h-5 w-5 mr-3 bg-white items-center" viewBox="0 0 24 24"></svg>Loading...</>:
+    <table class="table-auto border-collapse bg-gray-800 border-gray-800">
+      <thead>
+        <tr>
+          <th>ATTRIBUTE</th>
+          <th>INITIAL VALUE</th>
+          <th>CURRENT VALUE</th>
+        </tr>
+      </thead>
+      <tbody>
+        {atmStatsData.map((d,index)=>{
+          return <tr key={index}>
+              <td class='text-center '>{d.attributeName}</td>
+              <td class='text-center '>{d.initial}</td>
+              <td class='text-center '>{d.current}</td>
+            </tr>
+        })}
+        
+      </tbody>
+    </table>}
+    </div>
     
     <div className='chart-container'>
       <div className='chart'><Line data={pnlChartData} options={pnlChartOptions} /></div>
       <div className='chart'><Line data={chartData} options={chartOptions} /></div>
       
-      {/* <RTLineChart data={data} /> */}
     </div>
-      {/* Display the fetched data */}
       <div className='table-view'>
-
         <table id='table' className="m-1" style={{ borderCollapse: 'collapse', borderSpacing: '0', width: '100%' }}>
         <thead id='header'>
             <tr>

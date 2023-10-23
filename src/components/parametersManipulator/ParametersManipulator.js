@@ -61,7 +61,7 @@ const ParametersManipulator = function(props){
         }
        
     }
-    return(<div className="parameter-container">
+    return(<div className="parameter-container flex flex-col justify-center items-center gap-1 text-white p-2.5 w-full">
         <form onSubmit={submitForm} className="p-4 flex flex-col gap-3">
             <div className="flex justify-between gap-4">
                 <label>Parameter Name</label>
@@ -74,7 +74,7 @@ const ParametersManipulator = function(props){
             <button type="submit" className="bg-gray-700 btn">SUBMIT</button>
         </form>
 
-        <div className="parameter-table-container">
+        <div className="parameter-table-container text-white">
             <table>
                 <thead>
                     <tr>

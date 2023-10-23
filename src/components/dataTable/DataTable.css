@@ -5,7 +5,10 @@ table{
 }
 .tableHeaderStyle{
     text-align: center;
-    overflow: scroll;
+    margin: 1px;
+}
+.table-view::-webkit-scrollbar {
+    display: none;
 }
 
 .tableCellStyle{

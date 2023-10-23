@@ -59,17 +59,17 @@
     display: none;
   }
 
-table{
+/* table{
     border: .1px solid rgb(255, 255, 255) ;
     table-layout: fixed;
-}
+} */
 .tableHeaderStyle{
     border: 1px solid #ffffff;
     padding: 8px;
     text-align: center;
 }
-tbody{
+/* tbody{
     border: .1px solid rgb(252, 252, 252);
-}
+} */
 
 
