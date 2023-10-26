@@ -3,7 +3,7 @@ import RealTimeMinuteDataViewer from "../realTimeMinuteDataViewer/RealTimeMinute
 const Home = function(props){
     const [currentSection, setCurrentSection] = useState(localStorage.getItem('CURRENT_HOME_STATE')? localStorage.getItem('CURRENT_HOME_STATE') : 'banknifty')
     useEffect(()=>{
-        props.setCurrentSection(0);
+        localStorage.setItem('CURRENT_HOME_STATE', currentSection)
     },[props])
 
     const handleActiveSection = (e, activeSection)=>{
